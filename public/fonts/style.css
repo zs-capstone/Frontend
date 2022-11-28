@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("Pretendard-Regular.otf") format("otf"),
+    url("Pretendard-Regular.otf") format("otf"),
+    url("Pretendard-Regular.otf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PretendardBold";
+  src: url("Pretendard-Bold.ttf") format("ttf"),
+    url("Pretendard-Bold.ttf") format("ttf"),
+    url("Pretendard-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NexonBold";
+  src: url("NEXON Lv1 Gothic OTF Bold.otf") format("otf"),
+    url("NEXON Lv1 Gothic OTF Bold.otf") format("otf"),
+    url("NEXON Lv1 Gothic OTF Bold.otf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nexon";
+  src: url("NEXON Lv1 Gothic OTF.otf") format("otf"),
+    url("NEXON Lv1 Gothic OTF.otf") format("otf"),
+    url("NEXON Lv1 Gothic OTF.otf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NexonLight";
+  src: url("NEXON Lv1 Gothic OTF Light.otf") format("otf"),
+    url("NEXON Lv1 Gothic OTF Light.otf") format("otf"),
+    url("NEXON Lv1 Gothic OTF Light.otf") format("truetype");
+  font-display: swap;
+}
