@@ -4,13 +4,13 @@ import { IFollowType, IProfileType } from "../../types/member";
 
 // 이메일 중복 확인
 export const checkDupEmail = async (email: string): Promise<void> => {
-  const { data } = await axiosInstance.post(`/member/email`, { email });
+  const { data } = await axiosInstance.post(`/auth/email`, { email });
   return data;
 };
 
 // 닉네임 중복 확인
 export const checkDupNickname = async (nickname: string): Promise<void> => {
-  const { data } = await axiosInstance.post(`/member/nickname`, {
+  const { data } = await axiosInstance.post(`/auth/nickname`, {
     nickname,
   });
   return data;
