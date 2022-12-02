@@ -1,7 +1,10 @@
 import { GetServerSideProps, NextPage } from "next";
 import styled from "styled-components";
 import SurveyTitle from "../../../components/molecules/travel/survey/SurveyTitle";
-import { IGetTravelSurveyType } from "../../../types/survey";
+import {
+  IGetTravelSurveyType,
+  ISubmitTravelSurveyType,
+} from "../../../types/survey";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../../react-query/constants";
 import { getTravelSurvey } from "../../../apis/survey";
@@ -19,6 +22,9 @@ const SurveyQuestion: NextPage = () => {
   const [renderingContent, setRenderingContent] =
     useState<IGetTravelSurveyType>();
   const [surveyIndex, setSurveyIndex] = useState<number>(1);
+  const [submitResult, setSubmitResult] = useState<ISubmitTravelSurveyType[]>(
+    []
+  );
 
   useEffect(() => {
     if (contentList) {
@@ -34,6 +40,8 @@ const SurveyQuestion: NextPage = () => {
         <SurveyContent
           place={renderingContent}
           questionIndex={surveyIndex}
+          submitResult={submitResult}
+          setSubmitResult={setSubmitResult}
           setSurveyIndex={setSurveyIndex}
         />
       )}

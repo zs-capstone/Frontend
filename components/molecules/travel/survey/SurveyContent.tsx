@@ -1,19 +1,43 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Image from "next/image";
-import { IGetTravelSurveyType } from "../../../../types/survey";
+import {
+  IGetTravelSurveyType,
+  ISubmitTravelSurveyType,
+} from "../../../../types/survey";
 import { Dispatch, SetStateAction } from "react";
+import StarRatings from "react-star-ratings";
+import { useSubmitTravelSurvey } from "../../../../hooks/travel/survey/useSubmitTravelSurvey";
 
 const SurveyContent: React.FC<{
   place: IGetTravelSurveyType;
   questionIndex: number;
   setSurveyIndex: Dispatch<SetStateAction<number>>;
+  submitResult: ISubmitTravelSurveyType[];
+  setSubmitResult: Dispatch<SetStateAction<ISubmitTravelSurveyType[]>>;
 }> = (props) => {
   const router = useRouter();
-  const { place, questionIndex, setSurveyIndex } = props;
+  const {
+    place,
+    questionIndex,
+    setSurveyIndex,
+    submitResult,
+    setSubmitResult,
+  } = props;
 
-  const handleClickSurveyContent = async () => {
+  const submitTravelSurveyAction = useSubmitTravelSurvey();
+
+  const changeRating = (newRating: number) => {
+    setSubmitResult((prev) => [
+      ...prev,
+      {
+        placeId: place.id,
+        rate: newRating,
+      },
+    ]);
+
     if (questionIndex === 20) {
+      submitTravelSurveyAction(submitResult);
       router.push("/travel/survey/result");
     } else {
       setSurveyIndex((prev) => prev + 1);
@@ -21,7 +45,7 @@ const SurveyContent: React.FC<{
   };
 
   return (
-    <Container onClick={handleClickSurveyContent}>
+    <Container>
       <ImageContainer>
         <Image
           priority
@@ -35,6 +59,7 @@ const SurveyContent: React.FC<{
       </ImageContainer>
       <TextWrapper>
         <Title>{place.title}</Title>
+        <StarRatings numberOfStars={5} changeRating={changeRating} />
       </TextWrapper>
     </Container>
   );
@@ -46,7 +71,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
   width: 335px;
   height: 610px;
   border: 1px solid ${({ theme }) => theme.color.border2};
@@ -82,6 +106,7 @@ const Title = styled.p`
   font-size: ${({ theme }) =>
     theme.mixin.fontSize(24, theme.color.grey90, 400)};
   font-family: "Nexon";
+  margin-bottom: 20px;
 
   ${({ theme }) =>
     theme.media.mobile({

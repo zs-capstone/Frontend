@@ -11,13 +11,11 @@ export const getTravelSurvey = async (): Promise<IGetTravelSurveyType[]> => {
 };
 
 // 설문 결과 제출
-export const submitTravelSurvey = async ({
-  progress,
-  contentId,
-}: ISubmitTravelSurveyType): Promise<void> => {
-  const { data } = await axiosInstance.post(`/survey/result`, {
-    progress,
-    contentId,
+export const submitTravelSurvey = async (
+  surveyInitRatingList: ISubmitTravelSurveyType[]
+): Promise<void> => {
+  const { data } = await axiosInstance.post(`/surveys`, {
+    surveyInitRatingList,
   });
   return data;
 };

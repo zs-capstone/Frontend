@@ -1,15 +1,15 @@
-import { UseMutateAsyncFunction, useMutation } from "react-query";
+import { UseMutateFunction, useMutation } from "react-query";
 import { submitTravelSurvey } from "../../../apis/survey";
 import { ISubmitTravelSurveyType } from "../../../types/survey";
 
-export const useSubmitTravelSurvey = (): UseMutateAsyncFunction<
+export const useSubmitTravelSurvey = (): UseMutateFunction<
   void,
   unknown,
-  ISubmitTravelSurveyType,
+  ISubmitTravelSurveyType[],
   unknown
 > => {
-  const { mutateAsync } = useMutation(submitTravelSurvey, {
+  const { mutate } = useMutation(submitTravelSurvey, {
     onSuccess: () => {},
   });
-  return mutateAsync;
+  return mutate;
 };

@@ -8,6 +8,6 @@ export interface IGetTravelSurveyType {
 }
 
 export interface ISubmitTravelSurveyType {
-  progress: number;
-  contentId: number;
+  placeId: number;
+  rate: number;
 }
