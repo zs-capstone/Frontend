@@ -21,6 +21,7 @@ export interface IUserType {
     userResponse: {
       email: string;
       nickname: string;
+      isSurvey: boolean;
     };
   };
 }

@@ -13,6 +13,7 @@ export const useLogin = (
     onSuccess: (res) => {
       const { data } = res;
       const { accessToken, refreshToken, userResponse } = data;
+      const { email, nickname, isSurvey } = userResponse;
 
       removeCookie("accessToken");
       removeCookie("refreshToken");
@@ -26,15 +27,19 @@ export const useLogin = (
         localStorage.setItem("autoLogin", "autoLogin");
         setCookie("accessToken", accessToken, { expires });
         setCookie("refreshToken", refreshToken, { expires });
-        setCookie("email", userResponse.email, { expires });
-        setCookie("nickname", userResponse.nickname, { expires });
+        setCookie("email", email, { expires });
+        setCookie("nickname", nickname, { expires });
       } else {
         setCookie("accessToken", accessToken);
         setCookie("refreshToken", refreshToken);
-        setCookie("email", userResponse.email);
-        setCookie("nickname", userResponse.nickname);
+        setCookie("email", email);
+        setCookie("nickname", nickname);
       }
-      router.push("/");
+      if (isSurvey) {
+        router.push("/");
+      } else {
+        router.push("/travel/survey");
+      }
     },
   });
   return mutate;
