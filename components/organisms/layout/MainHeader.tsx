@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useLogout } from "../../../hooks/auth/useLogout";
-import { getCookie } from "../../../utils/cookieUtils";
+import { useRouter } from "next/router";
+import { getCookie, removeCookie } from "../../../utils/cookieUtils";
 import { CommonButton } from "../../atoms/ui/Button/CommonButton";
 import SearchInput from "../../molecules/ui/SearchInput";
 import { Spacer } from "../../atoms/ui/Spacer/Spacer";
@@ -15,8 +15,20 @@ const MainHeader: React.FC<{ setMenuOpen: Dispatch<SetStateAction<boolean>> }> =
 
     const [isLogin, setIsLogin] = useState<boolean>(false);
 
-    const logoutAction = useLogout();
+    const router = useRouter();
     const cookie = getCookie("nickname");
+
+    const handleLogout = () => {
+      localStorage.removeItem("autoLogin");
+      removeCookie("accessToken");
+      removeCookie("refreshToken");
+      removeCookie("grantType");
+      removeCookie("email");
+      removeCookie("nickname");
+      removeCookie("authority");
+
+      router.push("/");
+    };
 
     useEffect(() => {
       cookie ? setIsLogin(true) : setIsLogin(false);
@@ -66,7 +78,7 @@ const MainHeader: React.FC<{ setMenuOpen: Dispatch<SetStateAction<boolean>> }> =
               </Link>
               <ResponsiveSpacer size={8} axis={"horizontal"} />
               <ResponsiveButton
-                onClick={() => logoutAction()}
+                onClick={handleLogout}
                 size={14}
                 height={"36px"}
                 width={"96px"}

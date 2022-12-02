@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "styled-components";
 import { iconUrl } from "../../../axiosInstance/constants";
-import { useLogout } from "../../../hooks/auth/useLogout";
-import { getCookie } from "../../../utils/cookieUtils";
+import { getCookie, removeCookie } from "../../../utils/cookieUtils";
 import { Menu } from "../../atoms/menu/Menu";
 import BorderButton from "../../atoms/ui/Button/BorderButton";
 import { CommonButton } from "../../atoms/ui/Button/CommonButton";
@@ -17,8 +17,20 @@ const Menubar: React.FC<{
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
-  const logoutAction = useLogout();
   const cookie = getCookie("nickname");
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("autoLogin");
+    removeCookie("accessToken");
+    removeCookie("refreshToken");
+    removeCookie("grantType");
+    removeCookie("email");
+    removeCookie("nickname");
+    removeCookie("authority");
+
+    router.push("/");
+  };
 
   useEffect(() => {
     cookie ? setIsLogin(true) : setIsLogin(false);
@@ -41,7 +53,7 @@ const Menubar: React.FC<{
           </BorderButton>
           <Spacer size={11} axis={"horizontal"} />
           <CommonButton
-            onClick={() => logoutAction()}
+            onClick={handleLogout}
             size={14}
             height={"36px"}
             width={"96px"}
