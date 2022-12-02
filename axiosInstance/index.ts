@@ -4,7 +4,7 @@ import { getCookie, removeCookie, setCookie } from "../utils/cookieUtils";
 
 import { baseUrl } from "./constants";
 
-const config: AxiosRequestConfig = { baseURL: baseUrl, withCredentials: true };
+const config: AxiosRequestConfig = { baseURL: baseUrl };
 export const axiosInstance = axios.create(config);
 
 axiosInstance.interceptors.request.use((config) => {

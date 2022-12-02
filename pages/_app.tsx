@@ -94,12 +94,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                   }}
                 />
                 <Head>
-                  <title>여러다임</title>
+                  <title>제주 어디갈래?</title>
                   <meta
                     name="description"
                     content="행동 피드백 분석을 활용한 트래블러 여행 메이커 서비스"
                   />
-                  <meta property="og:title" content={"여러다임"} />
+                  <meta property="og:title" content={"제주 어디갈래?"} />
                   <meta property="og:type" content="website" />
                   <meta property="og:image" content={iconUrl("logo_emblem")} />
                 </Head>

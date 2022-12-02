@@ -20,7 +20,7 @@ const Welcome: NextPage = () => {
       <Title>환영합니다!</Title>
       <Spacer size={23} />
       <SubContent>
-        여러다임과 함께
+        제주 어디갈래와 함께
         <br />
         즐거운 여행을 준비하세요!
       </SubContent>

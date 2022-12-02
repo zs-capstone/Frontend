@@ -179,31 +179,30 @@ const RegisterInputForm: React.FC<{
         <Alert iconType={nicknameAlert.type} content={nicknameAlert.content} />
       )}
       <Spacer size={24} />
-      <Frame label={"생년월일"}>
+      <Frame label={"핸드폰 번호"}>
         <TextInput
           tabIndex={7}
-          width={"128px"}
+          width={"92px"}
           height={"50px"}
-          maxLength={4}
-          placeholder="년(4자)"
+          maxLength={3}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setYear(+e.target.value)
           }
         />
-        <SelectInput
-          isNumberType={true}
-          height={"50px"}
-          width={"92px"}
+        <TextInput
           tabIndex={8}
-          setState={setMonth as Dispatch<SetStateAction<ValueType>>}
-          data={["월", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+          width={"92px"}
+          height={"50px"}
+          maxLength={4}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setYear(+e.target.value)
+          }
         />
         <TextInput
           tabIndex={9}
           width={"92px"}
           height={"50px"}
-          placeholder="일"
-          maxLength={2}
+          maxLength={4}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setDay(+e.target.value);
           }}

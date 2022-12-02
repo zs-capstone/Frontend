@@ -17,7 +17,7 @@ export const register = async ({
   region,
   optional,
 }: IRegisterType): Promise<void> => {
-  const { data } = await axiosInstance.post(`/auth/new`, {
+  const { data } = await axiosInstance.post(`/auth/signup`, {
     email,
     nickname,
     password,
