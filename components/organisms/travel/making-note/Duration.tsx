@@ -16,7 +16,6 @@ const Duration: React.FC<{
     <Block height={"152px"}>
       <Wrapper>
         <Title>여행 일정</Title>
-        <Required>*필수 입력 항목입니다.</Required>
       </Wrapper>
       <Spacer size={24} />
       <Calendar
@@ -36,10 +35,6 @@ const Wrapper = styled.span`
   align-items: center;
   justify-content: space-between;
   margin-top: 24px;
-`;
-
-const Required = styled.p`
-  font-size: ${({ theme }) => theme.mixin.fontSize(12, theme.color.danger)};
 `;
 
 const Title = styled.h1`

@@ -11,6 +11,7 @@ import AddedList from "../../../components/organisms/travel/making-note/AddedLis
 import Duration from "../../../components/organisms/travel/making-note/Duration";
 import LikedList from "../../../components/organisms/travel/making-note/LikedList";
 import Location from "../../../components/organisms/travel/making-note/Location";
+import MakingNoteName from "../../../components/organisms/travel/making-note/MakingNoteName";
 import Personnel from "../../../components/organisms/travel/making-note/Personnel";
 import SearchList from "../../../components/organisms/travel/making-note/SearchList";
 import Theme from "../../../components/organisms/travel/making-note/Theme";
@@ -25,6 +26,7 @@ const MakingNoteAdvance: NextPage = () => {
   const [adult, setAdult] = useState<number>(0);
   const [kid, setKid] = useState<number>(0);
   const [pet, setPet] = useState<number>(0);
+  const [title, setTitle] = useState<string>("");
   const [makingNoteButtonDisabled, setMakingNoteButtonDisabled] =
     useState<boolean>(true);
   const [locationList, setLocationList] = useState<string[]>([]);
@@ -91,6 +93,8 @@ const MakingNoteAdvance: NextPage = () => {
               setEndDate={setEndDate}
             />
             <Spacer size={4} />
+            <MakingNoteName title={title} setTitle={setTitle} />
+            <Spacer size={4} />
             <Personnel
               adult={adult}
               kid={kid}
@@ -99,17 +103,17 @@ const MakingNoteAdvance: NextPage = () => {
               setKid={setKid}
               setPet={setPet}
             />
-            <Spacer size={4} />
+            {/* <Spacer size={4} />
             <Location
               locationList={locationList}
               setLocationList={setLocationList}
-            />
+            /> */}
             <Spacer size={4} />
-            <Theme themeList={themeList} setThemeList={setThemeList} />
+            {/* <Theme themeList={themeList} setThemeList={setThemeList} /> */}
           </LeftMenuWrapper>
           <RightMenuWrapper>
-            <LikedList addedList={addedList} setAddedList={setAddedList} />
-            <ResponsiveSpacer size={40} />
+            {/* <LikedList addedList={addedList} setAddedList={setAddedList} /> */}
+            {/* <ResponsiveSpacer size={40} /> */}
             <SearchList
               title={"꼭 추가해야할 여행지"}
               searchKeyword={searchKeyword}
