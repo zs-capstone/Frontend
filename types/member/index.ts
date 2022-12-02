@@ -15,14 +15,14 @@ export interface ILoginType {
 }
 
 export interface IUserType {
-  accessToken: string;
-  refreshToken: string;
-  grantType: string;
-  memberId: number;
-  email: string;
-  nickname: string;
-  authority: string;
-  surveyIndex?: number;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+    userResponse: {
+      email: string;
+      nickname: string;
+    };
+  };
 }
 
 export interface IProfileType {

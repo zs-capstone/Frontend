@@ -11,10 +11,9 @@ axiosInstance.interceptors.request.use((config) => {
   if (!config.headers) return config;
 
   const accessToken = getCookie("accessToken");
-  const grantType = getCookie("grantType");
 
-  if (accessToken && grantType) {
-    config.headers.Authorization = `${grantType} ${accessToken}`;
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
   return config;
@@ -23,21 +22,9 @@ axiosInstance.interceptors.request.use((config) => {
 const getRefreshToken = mem(
   async (): Promise<string | void> => {
     try {
-      const accessToken = getCookie("accessToken");
-      const refreshToken = getCookie("refreshToken");
-      const grantType = getCookie("grantType");
-
       const {
-        data: {
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-          grantType: newGrantType,
-        },
-      } = await axiosInstance.post("/auth/reissue", {
-        accessToken,
-        refreshToken,
-        grantType,
-      });
+        data: { accessToken: newAccessToken, refreshToken: newRefreshToken },
+      } = await axiosInstance.post("/auth/reissue");
 
       if (localStorage.getItem("autoLogin")) {
         const expires = new Date();
@@ -45,21 +32,17 @@ const getRefreshToken = mem(
 
         setCookie("accessToken", newAccessToken, { expires });
         setCookie("refreshToken", newRefreshToken, { expires });
-        setCookie("grantType", newGrantType, { expires });
       } else {
         setCookie("accessToken", newAccessToken);
         setCookie("refreshToken", newRefreshToken);
-        setCookie("grantType", newGrantType);
       }
 
       return newAccessToken;
     } catch (e) {
       removeCookie("accessToken");
       removeCookie("refreshToken");
-      removeCookie("grantType");
       removeCookie("email");
       removeCookie("nickname");
-      removeCookie("authority");
     }
   },
   { maxAge: 1000 }

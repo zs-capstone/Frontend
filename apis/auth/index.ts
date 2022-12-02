@@ -39,16 +39,8 @@ export const login = async ({
 };
 
 // 토큰 재발급
-export const reissueToken = async ({
-  accessToken,
-  refreshToken,
-  grantType,
-}: IReissueTokenType): Promise<IUserType> => {
-  const { data } = await axiosInstance.post(`/auth/reissue`, {
-    accessToken,
-    refreshToken,
-    grantType,
-  });
+export const reissueToken = async (): Promise<IUserType> => {
+  const { data } = await axiosInstance.post(`/auth/reissue`);
   return data;
 };
 
