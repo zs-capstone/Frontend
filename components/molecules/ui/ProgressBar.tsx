@@ -23,7 +23,7 @@ const ProgressBar: React.FC<{ progress: number }> = (props) => {
           src={iconUrl("marker_dest")}
           alt={"성향 테스트 엔드 포인트를 알려주는 마커"}
         />
-        <MarkerDestNumber>10</MarkerDestNumber>
+        <MarkerDestNumber>20</MarkerDestNumber>
       </MarkerDestWrapper>
       <Bar>
         <Filling progress={progress}></Filling>
@@ -48,7 +48,7 @@ const Container = styled.div`
 const MarkerWrapper = styled.div<{ progress: number }>`
   position: absolute;
   top: 0;
-  left: ${(props) => props.progress * 60 - 1}px;
+  left: ${(props) => props.progress * 30 - 1}px;
   z-index: 1;
   transition: left 1s;
   transform: translateX(-50%);
@@ -57,7 +57,7 @@ const MarkerWrapper = styled.div<{ progress: number }>`
 
   ${(props) =>
     props.theme.media.mobile({
-      left: `${props.progress * 30 - 1}px`,
+      left: `${props.progress * 15 - 1}px`,
     })}
 `;
 
@@ -104,13 +104,13 @@ const Bar = styled.div`
 
 const Filling = styled.div<{ progress: number }>`
   height: 100%;
-  width: ${(props) => props.progress * 60}px;
+  width: ${(props) => props.progress * 30}px;
   border-radius: 60px;
   background-color: ${({ theme }) => theme.color.secondary60};
   transition: width 1s;
 
   ${(props) =>
     props.theme.media.mobile({
-      width: `${props.progress * 30 - 1}px`,
+      width: `${props.progress * 15 - 1}px`,
     })}
 `;

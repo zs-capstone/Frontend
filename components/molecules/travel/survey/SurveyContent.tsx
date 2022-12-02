@@ -1,44 +1,22 @@
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
-import { UseMutateAsyncFunction } from "react-query";
 import styled from "styled-components";
 import Image from "next/image";
-import {
-  IGetTravelSurveyType,
-  ISubmitTravelSurveyType,
-} from "../../../../types/survey";
-import { useReissueToken } from "../../../../hooks/auth/useReissueToken";
-import { getCookie } from "../../../../utils/cookieUtils";
+import { IGetTravelSurveyType } from "../../../../types/survey";
+import { Dispatch, SetStateAction } from "react";
 
 const SurveyContent: React.FC<{
-  questionIndex: number;
   place: IGetTravelSurveyType;
-  setQuestionIndex: Dispatch<SetStateAction<number>>;
-  onClickAction: UseMutateAsyncFunction<
-    void,
-    unknown,
-    ISubmitTravelSurveyType,
-    unknown
-  >;
+  questionIndex: number;
+  setSurveyIndex: Dispatch<SetStateAction<number>>;
 }> = (props) => {
   const router = useRouter();
-  const reissueTokenAction = useReissueToken();
-  const { questionIndex, place, onClickAction, setQuestionIndex } = props;
+  const { place, questionIndex, setSurveyIndex } = props;
 
   const handleClickSurveyContent = async () => {
-    await onClickAction({
-      progress: questionIndex,
-      contentId: place.contentId,
-    });
-    if (questionIndex < 10) {
-      setQuestionIndex(questionIndex + 1);
-    } else {
-      const accessToken = getCookie("accessToken");
-      const refreshToken = getCookie("refreshToken");
-      const grantType = getCookie("grantType");
-
-      await reissueTokenAction({ accessToken, refreshToken, grantType });
+    if (questionIndex === 20) {
       router.push("/travel/survey/result");
+    } else {
+      setSurveyIndex((prev) => prev + 1);
     }
   };
 
@@ -46,6 +24,7 @@ const SurveyContent: React.FC<{
     <Container onClick={handleClickSurveyContent}>
       <ImageContainer>
         <Image
+          priority
           objectFit="cover"
           layout="responsive"
           height={380}
@@ -56,11 +35,6 @@ const SurveyContent: React.FC<{
       </ImageContainer>
       <TextWrapper>
         <Title>{place.title}</Title>
-        <TagWrapper>
-          {place.tag.split(",").map((item, idx) => (
-            <Tag key={idx}>#{item}</Tag>
-          ))}
-        </TagWrapper>
       </TextWrapper>
     </Container>
   );

@@ -1,7 +1,9 @@
 export interface IGetTravelSurveyType {
-  contentId: number;
+  id: number;
   title: string;
-  tag: string;
+  introduction: string;
+  type: string;
+  tag: string[];
   imageUrl: string;
 }
 

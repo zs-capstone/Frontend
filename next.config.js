@@ -14,6 +14,7 @@ module.exports = {
 module.exports = {
   images: {
     domains: [
+      "capstone4-s3.s3.ap-northeast-2.amazonaws.com",
       "api.cdn.visitjeju.net",
       "yeoreodigm-s3.s3.ap-northeast-2.amazonaws.com",
       "s3.ap-northeast-2.amazonaws.com",

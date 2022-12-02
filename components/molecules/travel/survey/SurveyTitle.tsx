@@ -4,7 +4,7 @@ const SurveyTitle: React.FC = () => {
   return (
     <>
       <Title>여행지 성향 테스트</Title>
-      <SubContent>마음에 드는 여행지를 선택해주세요!</SubContent>
+      <SubContent>여행지의 별점을 매겨주세요!</SubContent>
     </>
   );
 };

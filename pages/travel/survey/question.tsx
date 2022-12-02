@@ -1,52 +1,42 @@
 import { GetServerSideProps, NextPage } from "next";
 import styled from "styled-components";
-import { useGetTravelSurvey } from "../../../hooks/travel/survey/useGetTravelSurvey";
-import SurveyContent from "../../../components/molecules/travel/survey/SurveyContent";
 import SurveyTitle from "../../../components/molecules/travel/survey/SurveyTitle";
-import ProgressBar from "../../../components/molecules/ui/ProgressBar";
-import SurveyContentWrapper from "../../../components/organisms/travel/survey/SurveyContentContainer";
-import { useSubmitTravelSurvey } from "../../../hooks/travel/survey/useSubmitTravelSurvey";
+import { IGetTravelSurveyType } from "../../../types/survey";
+import { useQuery } from "react-query";
+import { queryKeys } from "../../../react-query/constants";
+import { getTravelSurvey } from "../../../apis/survey";
+import SurveyContent from "../../../components/molecules/travel/survey/SurveyContent";
+import { useState } from "react";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { getCookie } from "../../../utils/cookieUtils";
+import ProgressBar from "../../../components/molecules/ui/ProgressBar";
 
 const SurveyQuestion: NextPage = () => {
-  const { contentList, data, setUpdatedSurveyIndex, updatedSurveyIndex } =
-    useGetTravelSurvey();
-  const submitTravelSurveyAction = useSubmitTravelSurvey();
-  const router = useRouter();
+  const { data: contentList } = useQuery<IGetTravelSurveyType[]>(
+    queryKeys.travelSurvey,
+    getTravelSurvey
+  );
+
+  const [renderingContent, setRenderingContent] =
+    useState<IGetTravelSurveyType>();
+  const [surveyIndex, setSurveyIndex] = useState<number>(1);
 
   useEffect(() => {
-    if (getCookie("authority") !== "ROLE_SURVEY") {
-      router.push("/");
+    if (contentList) {
+      setRenderingContent(contentList[surveyIndex - 1]);
     }
-  });
-
-  if (!data || !contentList) {
-    return <></>;
-  }
-
-  const firstPlace = contentList[0];
-  const secondPlace = contentList[1];
+  }, [contentList, surveyIndex]);
 
   return (
     <Container>
       <SurveyTitle />
-      <ProgressBar progress={updatedSurveyIndex} />
-      <SurveyContentWrapper>
+      <ProgressBar progress={surveyIndex} />
+      {renderingContent && (
         <SurveyContent
-          setQuestionIndex={setUpdatedSurveyIndex}
-          place={firstPlace}
-          questionIndex={updatedSurveyIndex}
-          onClickAction={submitTravelSurveyAction}
+          place={renderingContent}
+          questionIndex={surveyIndex}
+          setSurveyIndex={setSurveyIndex}
         />
-        <SurveyContent
-          setQuestionIndex={setUpdatedSurveyIndex}
-          place={secondPlace}
-          questionIndex={updatedSurveyIndex}
-          onClickAction={submitTravelSurveyAction}
-        />
-      </SurveyContentWrapper>
+      )}
     </Container>
   );
 };

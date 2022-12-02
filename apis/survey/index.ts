@@ -5,10 +5,8 @@ import {
 } from "../../types/survey";
 
 // 설문 정보 조회
-export const getTravelSurvey = async (
-  progress: number
-): Promise<IGetTravelSurveyType[]> => {
-  const { data } = await axiosInstance.get(`/survey/${progress}`);
+export const getTravelSurvey = async (): Promise<IGetTravelSurveyType[]> => {
+  const { data } = await axiosInstance.get("/surveys");
   return data.data;
 };
 
