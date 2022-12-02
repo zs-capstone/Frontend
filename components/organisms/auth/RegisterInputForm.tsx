@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import { useCheckDupEmail } from "../../../hooks/auth/useCheckDupEmail";
 import { useNicknameLogic } from "../../../hooks/logic/useNicknameLogic";
@@ -18,17 +18,19 @@ const RegisterInputForm: React.FC<{
   inputNickname: string;
   inputPassword: string;
   inputConfirmPassword: string;
-  year: number;
-  month: number;
-  day: number;
+  firstNumber: string;
+  secondNumber: string;
+  thirdNumber: string;
   region: string;
+  name: string;
+  setName: Dispatch<SetStateAction<string>>;
   setInputEmail: Dispatch<SetStateAction<string>>;
   setInputNickname: Dispatch<SetStateAction<string>>;
   setInputPassword: Dispatch<SetStateAction<string>>;
   setSubmitButtonDisabled: Dispatch<SetStateAction<boolean>>;
-  setYear: Dispatch<SetStateAction<number>>;
-  setMonth: Dispatch<SetStateAction<number>>;
-  setDay: Dispatch<SetStateAction<number>>;
+  setFirstNumber: Dispatch<SetStateAction<string>>;
+  setSecondNumber: Dispatch<SetStateAction<string>>;
+  setThirdNumber: Dispatch<SetStateAction<string>>;
   setRegion: Dispatch<SetStateAction<string>>;
   setInputConfirmPassword: Dispatch<SetStateAction<string>>;
   setIsEmailChecked: SetterOrUpdater<boolean>;
@@ -39,12 +41,14 @@ const RegisterInputForm: React.FC<{
     inputNickname,
     inputPassword,
     inputConfirmPassword,
+    name,
+    setName,
     setInputEmail,
     setInputNickname,
     setInputPassword,
-    setYear,
-    setMonth,
-    setDay,
+    setFirstNumber,
+    setSecondNumber,
+    setThirdNumber,
     setRegion,
     setIsEmailChecked,
     setIsNicknameChecked,
@@ -181,13 +185,23 @@ const RegisterInputForm: React.FC<{
       <Spacer size={24} />
       <Frame label={"핸드폰 번호"} required>
         <TextInput
-          tabIndex={7}
+          tabIndex={6}
           width={"92px"}
           height={"50px"}
           placeholder={"xxx"}
           maxLength={3}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setYear(+e.target.value)
+            setFirstNumber(e.target.value)
+          }
+        />
+        <TextInput
+          tabIndex={7}
+          width={"92px"}
+          height={"50px"}
+          placeholder={"xxxx"}
+          maxLength={4}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSecondNumber(e.target.value)
           }
         />
         <TextInput
@@ -196,18 +210,8 @@ const RegisterInputForm: React.FC<{
           height={"50px"}
           placeholder={"xxxx"}
           maxLength={4}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setYear(+e.target.value)
-          }
-        />
-        <TextInput
-          tabIndex={9}
-          width={"92px"}
-          height={"50px"}
-          placeholder={"xxxx"}
-          maxLength={4}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setDay(+e.target.value);
+            setThirdNumber(e.target.value);
           }}
         />
       </Frame>
@@ -216,9 +220,11 @@ const RegisterInputForm: React.FC<{
         <TextInput
           width={"328px"}
           height={"50px"}
-          tabIndex={5}
+          tabIndex={9}
           placeholder={"이름을 입력해주세요."}
-          onChange={handleInputNicknameChange}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(e.target.value)
+          }
         />
       </Frame>
       <Spacer size={24} />

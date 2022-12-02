@@ -3,11 +3,9 @@ export interface IRegisterType {
   email: string;
   nickname: string;
   password: string;
-  year: number;
-  month: number;
-  day: number;
+  name: string;
+  phone: string;
   region: string;
-  optional: boolean;
 }
 
 // 로그인 타입

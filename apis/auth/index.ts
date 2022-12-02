@@ -11,21 +11,17 @@ export const register = async ({
   email,
   nickname,
   password,
-  year,
-  month,
-  day,
+  phone,
   region,
-  optional,
+  name,
 }: IRegisterType): Promise<void> => {
   const { data } = await axiosInstance.post(`/auth/signup`, {
     email,
     nickname,
     password,
-    year,
-    month,
-    day,
+    phone,
+    name,
     region,
-    optional,
   });
   return data;
 };

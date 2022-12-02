@@ -16,16 +16,13 @@ const Register: NextPage = () => {
   const [inputPassword, setInputPassword] = useState<string>("");
   const [inputConfirmPassword, setInputConfirmPassword] = useState<string>("");
 
-  const [year, setYear] = useState<number>(0);
-  const [month, setMonth] = useState<number>(0);
-  const [day, setDay] = useState<number>(0);
+  const [firstNumber, setFirstNumber] = useState<string>("000");
+  const [secondNumber, setSecondNumber] = useState<string>("0000");
+  const [thirdNumber, setThirdNumber] = useState<string>("0000");
+
+  const [name, setName] = useState<string>("");
 
   const [region, setRegion] = useState<string>("");
-
-  const [requiredTermsChecked, setRequiredTermsChecked] =
-    useState<boolean>(false);
-  const [optionalTermChecked, setOptionalTermsChecked] =
-    useState<boolean>(false);
 
   const [submitButtonDisabled, setSubmitButtonDisabled] =
     useState<boolean>(true);
@@ -43,11 +40,9 @@ const Register: NextPage = () => {
       email: inputEmail,
       nickname: inputNickname,
       password: inputPassword,
-      year,
-      month,
-      day,
+      phone: firstNumber + secondNumber + thirdNumber,
+      name,
       region,
-      optional: optionalTermChecked,
     });
   };
 
@@ -57,7 +52,11 @@ const Register: NextPage = () => {
       isNicknameChecked &&
       checkPasswordValidation(inputPassword) &&
       inputPassword === inputConfirmPassword &&
-      requiredTermsChecked
+      firstNumber &&
+      secondNumber &&
+      thirdNumber &&
+      name &&
+      region
     ) {
       setSubmitButtonDisabled(false);
     } else {
@@ -68,7 +67,11 @@ const Register: NextPage = () => {
     isNicknameChecked,
     inputPassword,
     inputConfirmPassword,
-    requiredTermsChecked,
+    firstNumber,
+    secondNumber,
+    thirdNumber,
+    name,
+    region,
   ]);
 
   return (
@@ -82,17 +85,19 @@ const Register: NextPage = () => {
           inputNickname={inputNickname}
           inputPassword={inputPassword}
           inputConfirmPassword={inputConfirmPassword}
-          year={year}
-          month={month}
-          day={day}
+          firstNumber={firstNumber}
+          secondNumber={secondNumber}
+          thirdNumber={thirdNumber}
           region={region}
+          name={name}
+          setName={setName}
           setInputEmail={setInputEmail}
           setInputNickname={setInputNickname}
           setInputPassword={setInputPassword}
           setSubmitButtonDisabled={setSubmitButtonDisabled}
-          setYear={setYear}
-          setMonth={setMonth}
-          setDay={setDay}
+          setFirstNumber={setFirstNumber}
+          setSecondNumber={setSecondNumber}
+          setThirdNumber={setThirdNumber}
           setRegion={setRegion}
           setInputConfirmPassword={setInputConfirmPassword}
           setIsEmailChecked={setIsEmailChecked}
