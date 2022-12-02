@@ -98,13 +98,6 @@ const Register: NextPage = () => {
           setIsEmailChecked={setIsEmailChecked}
           setIsNicknameChecked={setIsNicknameChecked}
         />
-        <TermsOfService
-          requiredTermsChecked={requiredTermsChecked}
-          setSubmitButtonDisabled={setSubmitButtonDisabled}
-          setRequiredTermsChecked={setRequiredTermsChecked}
-          setOptionalTermsChecked={setOptionalTermsChecked}
-        />
-        <Spacer size={24} />
         <SubmitButton disabled={submitButtonDisabled} tabIndex={17}>
           회원가입
         </SubmitButton>

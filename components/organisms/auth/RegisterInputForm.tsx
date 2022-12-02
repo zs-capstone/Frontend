@@ -179,11 +179,12 @@ const RegisterInputForm: React.FC<{
         <Alert iconType={nicknameAlert.type} content={nicknameAlert.content} />
       )}
       <Spacer size={24} />
-      <Frame label={"핸드폰 번호"}>
+      <Frame label={"핸드폰 번호"} required>
         <TextInput
           tabIndex={7}
           width={"92px"}
           height={"50px"}
+          placeholder={"xxx"}
           maxLength={3}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setYear(+e.target.value)
@@ -193,6 +194,7 @@ const RegisterInputForm: React.FC<{
           tabIndex={8}
           width={"92px"}
           height={"50px"}
+          placeholder={"xxxx"}
           maxLength={4}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setYear(+e.target.value)
@@ -202,6 +204,7 @@ const RegisterInputForm: React.FC<{
           tabIndex={9}
           width={"92px"}
           height={"50px"}
+          placeholder={"xxxx"}
           maxLength={4}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setDay(+e.target.value);
@@ -209,7 +212,17 @@ const RegisterInputForm: React.FC<{
         />
       </Frame>
       <Spacer size={24} />
-      <Frame label={"지역"}>
+      <Frame label={"이름"} required>
+        <TextInput
+          width={"328px"}
+          height={"50px"}
+          tabIndex={5}
+          placeholder={"이름을 입력해주세요."}
+          onChange={handleInputNicknameChange}
+        />
+      </Frame>
+      <Spacer size={24} />
+      <Frame label={"지역"} required>
         <SelectInput
           setState={setRegion as Dispatch<SetStateAction<ValueType>>}
           width={"328px"}
