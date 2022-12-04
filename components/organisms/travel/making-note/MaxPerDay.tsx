@@ -77,7 +77,7 @@ const ImageContainer = styled.div`
 `;
 
 const PlaceCountWrapper = styled.span`
-  margin-top: 24px;
+  margin-top: 40px;
   ${({ theme }) => theme.mixin.flexCenter()};
   flex-direction: row;
 `;

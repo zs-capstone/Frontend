@@ -1,6 +1,9 @@
 export interface IPlaceListType {
-  next: number;
   data: {
+    first: boolean;
+    last: boolean;
+    size: number;
+    number: number;
     content: IPlaceListDataType[];
   };
 }

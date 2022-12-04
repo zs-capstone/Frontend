@@ -27,7 +27,7 @@ const SearchList: React.FC<{
     ({ pageParam = 1 }) =>
       fetchPlaceSearchList(pageParam, searchKeyword || "undefined"),
     {
-      getNextPageParam: (lastPage) => lastPage.next || undefined,
+      getNextPageParam: (lastPage) => lastPage.data.number + 1 || undefined,
     }
   );
 
