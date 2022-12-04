@@ -12,6 +12,7 @@ import Duration from "../../../components/organisms/travel/making-note/Duration"
 import LikedList from "../../../components/organisms/travel/making-note/LikedList";
 import Location from "../../../components/organisms/travel/making-note/Location";
 import MakingNoteName from "../../../components/organisms/travel/making-note/MakingNoteName";
+import MaxPerDay from "../../../components/organisms/travel/making-note/MaxPerDay";
 import Personnel from "../../../components/organisms/travel/making-note/Personnel";
 import PublicShare from "../../../components/organisms/travel/making-note/PublicShare";
 import SearchList from "../../../components/organisms/travel/making-note/SearchList";
@@ -106,6 +107,8 @@ const MakingNoteAdvance: NextPage = () => {
             />
             <Spacer size={4} />
             <PublicShare />
+            <Spacer size={4} />
+            <MaxPerDay />
             {/* <Spacer size={4} />
             <Location
               locationList={locationList}
