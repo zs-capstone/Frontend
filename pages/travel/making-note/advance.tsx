@@ -13,6 +13,7 @@ import LikedList from "../../../components/organisms/travel/making-note/LikedLis
 import Location from "../../../components/organisms/travel/making-note/Location";
 import MakingNoteName from "../../../components/organisms/travel/making-note/MakingNoteName";
 import Personnel from "../../../components/organisms/travel/making-note/Personnel";
+import PublicShare from "../../../components/organisms/travel/making-note/PublicShare";
 import SearchList from "../../../components/organisms/travel/making-note/SearchList";
 import Theme from "../../../components/organisms/travel/making-note/Theme";
 import { useSubmitMakingNoteAdvance } from "../../../hooks/travel/making-note/useSubmitMakingNoteAdvance";
@@ -103,6 +104,8 @@ const MakingNoteAdvance: NextPage = () => {
               setKid={setKid}
               setPet={setPet}
             />
+            <Spacer size={4} />
+            <PublicShare />
             {/* <Spacer size={4} />
             <Location
               locationList={locationList}
@@ -114,13 +117,13 @@ const MakingNoteAdvance: NextPage = () => {
           <RightMenuWrapper>
             {/* <LikedList addedList={addedList} setAddedList={setAddedList} /> */}
             {/* <ResponsiveSpacer size={40} /> */}
-            <SearchList
+            {/* <SearchList
               title={"꼭 추가해야할 여행지"}
               searchKeyword={searchKeyword}
               setSearchKeyword={setSearchKeyword}
               addedList={addedList}
               setAddedList={setAddedList}
-            />
+            /> */}
             <Spacer size={40} />
             <AddedList addedList={addedList} setAddedList={setAddedList} />
             <MakingNoteButton
