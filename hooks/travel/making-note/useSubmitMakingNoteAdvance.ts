@@ -1,3 +1,4 @@
+import { AxiosResponseHeaders } from "axios";
 import { useRouter } from "next/router";
 import { UseMutateFunction, useMutation } from "react-query";
 import { submitMakingNoteAdvance } from "../../../apis/note";
@@ -5,7 +6,7 @@ import { ISubmitMakingNoteAdvanceType } from "../../../types/note";
 
 export const useSubmitMakingNoteAdvance = (): {
   mutate: UseMutateFunction<
-    { travelNoteId: number },
+    AxiosResponseHeaders,
     unknown,
     ISubmitMakingNoteAdvanceType,
     unknown
@@ -16,7 +17,10 @@ export const useSubmitMakingNoteAdvance = (): {
 
   const { mutate, isLoading } = useMutation(submitMakingNoteAdvance, {
     onSuccess: (data) => {
-      router.push(`/travel/making-note/${data.travelNoteId}`);
+      const splittedUrls = data.location.split("/");
+      router.push(
+        `/travel/making-note/${splittedUrls[splittedUrls.length - 1]}`
+      );
     },
   });
   return { mutate, isLoading };

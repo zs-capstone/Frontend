@@ -22,9 +22,14 @@ axiosInstance.interceptors.request.use((config) => {
 const getRefreshToken = mem(
   async (): Promise<string | void> => {
     try {
+      const refreshToken = getCookie("refreshToken");
       const {
         data: { accessToken: newAccessToken, refreshToken: newRefreshToken },
-      } = await axiosInstance.get("/auth/reissue");
+      } = await axiosInstance.get("/auth/reissue", {
+        headers: {
+          RefreshToken: refreshToken,
+        },
+      });
 
       if (localStorage.getItem("autoLogin")) {
         const expires = new Date();

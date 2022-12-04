@@ -1,3 +1,4 @@
+import { AxiosResponseHeaders } from "axios";
 import { axiosInstance } from "../../axiosInstance";
 import {
   ICommonContentType,
@@ -32,8 +33,8 @@ export const submitMakingNoteAdvance = async ({
   placeList,
   publicShare,
   maxPlacePerDay,
-}: ISubmitMakingNoteAdvanceType): Promise<{ travelNoteId: number }> => {
-  const { data } = await axiosInstance.post(`/notes`, {
+}: ISubmitMakingNoteAdvanceType): Promise<AxiosResponseHeaders> => {
+  const { headers } = await axiosInstance.post(`/notes`, {
     title,
     dayStart,
     dayEnd,
@@ -44,7 +45,7 @@ export const submitMakingNoteAdvance = async ({
     publicShare,
     maxPlacePerDay,
   });
-  return data;
+  return headers;
 };
 
 // 기본 정보 조회
