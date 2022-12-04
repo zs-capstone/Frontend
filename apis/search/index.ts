@@ -11,7 +11,9 @@ export const fetchPlaceSearchList = async (
   page: number,
   content: string
 ): Promise<IPlaceListType> => {
-  const { data } = await axiosInstance.get(`/search/place/${content}/${page}`);
+  const { data } = await axiosInstance.get(
+    `/search/place?content=${content}&page=${page}`
+  );
   return data;
 };
 

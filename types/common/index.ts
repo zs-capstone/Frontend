@@ -1,12 +1,14 @@
 export interface IPlaceListType {
   next: number;
-  data: IPlaceListDataType[];
+  data: {
+    content: IPlaceListDataType[];
+  };
 }
 
 export interface IPlaceListDataType {
   placeId: number;
   title: string;
-  imageUrl: string;
+  thumbnail: string;
   address?: string;
   hasNext?: boolean;
   likeCount?: number;

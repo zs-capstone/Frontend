@@ -25,7 +25,7 @@ const PlaceAddedProfile: React.FC<{
     <Container>
       <LeftMenuWrapper>
         <ImageContainer
-          src={place.imageUrl}
+          src={place.thumbnail}
           alt={`여행 계획 준비 페이지 ${place.title} 여행지 사진`}
         />
         <TextWrapper>

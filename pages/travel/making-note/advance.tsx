@@ -120,13 +120,13 @@ const MakingNoteAdvance: NextPage = () => {
           <RightMenuWrapper>
             {/* <LikedList addedList={addedList} setAddedList={setAddedList} /> */}
             {/* <ResponsiveSpacer size={40} /> */}
-            {/* <SearchList
+            <SearchList
               title={"꼭 추가해야할 여행지"}
               searchKeyword={searchKeyword}
               setSearchKeyword={setSearchKeyword}
               addedList={addedList}
               setAddedList={setAddedList}
-            /> */}
+            />
             <Spacer size={40} />
             <AddedList addedList={addedList} setAddedList={setAddedList} />
             <MakingNoteButton

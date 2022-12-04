@@ -31,7 +31,7 @@ const SearchList: React.FC<{
     }
   );
 
-  if (!data || data.pages[0].data.length === 0) {
+  if (!data || data.pages[0].data.content.length === 0) {
     return (
       <Container>
         <Title>{title}</Title>
@@ -72,12 +72,12 @@ const SearchList: React.FC<{
           scrollableTarget="scrollableSearch"
           loader={<ClipLoader color={"#FA8125"} />}
           dataLength={data.pages.reduce(
-            (acc, page) => acc + page.data.length,
+            (acc, page) => acc + page.data.content.length,
             0
           )}
         >
           {data.pages.map((pageData) => {
-            return pageData.data.map((place) => {
+            return pageData.data.content.map((place) => {
               return (
                 <PlaceProfile
                   addedList={addedList}

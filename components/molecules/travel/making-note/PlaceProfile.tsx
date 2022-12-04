@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { IPlaceListDataType } from "../../../../types/common";
@@ -28,7 +27,7 @@ const PlaceProfile: React.FC<{
   return (
     <Container>
       <LeftMenuWrapper>
-        <ImageContainer imageUrl={place.imageUrl} />
+        <ImageContainer imageUrl={place.thumbnail} />
         <TextWrapper>
           <Title>{place.title}</Title>
           <Address>{place.address}</Address>
