@@ -5,7 +5,7 @@ import {
   IGetTravelSurveyType,
   ISubmitTravelSurveyType,
 } from "../../../../types/survey";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import StarRatings from "react-star-ratings";
 import { useSubmitTravelSurvey } from "../../../../hooks/travel/survey/useSubmitTravelSurvey";
 
@@ -13,31 +13,22 @@ const SurveyContent: React.FC<{
   place: IGetTravelSurveyType;
   questionIndex: number;
   setSurveyIndex: Dispatch<SetStateAction<number>>;
-  submitResult: ISubmitTravelSurveyType[];
-  setSubmitResult: Dispatch<SetStateAction<ISubmitTravelSurveyType[]>>;
 }> = (props) => {
   const router = useRouter();
-  const {
-    place,
-    questionIndex,
-    setSurveyIndex,
-    submitResult,
-    setSubmitResult,
-  } = props;
+  const { place, questionIndex, setSurveyIndex } = props;
+
+  const submitResult = useRef<ISubmitTravelSurveyType[]>([]);
 
   const submitTravelSurveyAction = useSubmitTravelSurvey();
 
   const changeRating = (newRating: number) => {
-    setSubmitResult((prev) => [
-      ...prev,
-      {
-        placeId: place.id,
-        rate: newRating,
-      },
-    ]);
+    submitResult.current.push({
+      placeId: place.id,
+      rate: newRating,
+    });
 
     if (questionIndex === 20) {
-      submitTravelSurveyAction(submitResult);
+      submitTravelSurveyAction(submitResult.current);
       router.push("/travel/survey/result");
     } else {
       setSurveyIndex((prev) => prev + 1);

@@ -22,9 +22,6 @@ const SurveyQuestion: NextPage = () => {
   const [renderingContent, setRenderingContent] =
     useState<IGetTravelSurveyType>();
   const [surveyIndex, setSurveyIndex] = useState<number>(1);
-  const [submitResult, setSubmitResult] = useState<ISubmitTravelSurveyType[]>(
-    []
-  );
 
   useEffect(() => {
     if (contentList) {
@@ -40,8 +37,6 @@ const SurveyQuestion: NextPage = () => {
         <SurveyContent
           place={renderingContent}
           questionIndex={surveyIndex}
-          submitResult={submitResult}
-          setSubmitResult={setSubmitResult}
           setSurveyIndex={setSurveyIndex}
         />
       )}
