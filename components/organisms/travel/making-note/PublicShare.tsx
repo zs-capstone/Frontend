@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import styled from "styled-components";
 import Block from "../../../molecules/travel/making-note/Block";
 
-const PublicShare: React.FC = () => {
-  const [shareOther, setShareOther] = useState<boolean>(false);
+const PublicShare: React.FC<{
+  shareOther: boolean;
+  setShareOther: Dispatch<SetStateAction<boolean>>;
+}> = (props) => {
+  const { shareOther, setShareOther } = props;
 
   return (
     <Block height={"152px"}>

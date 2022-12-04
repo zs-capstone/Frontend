@@ -24,7 +24,7 @@ const getRefreshToken = mem(
     try {
       const {
         data: { accessToken: newAccessToken, refreshToken: newRefreshToken },
-      } = await axiosInstance.post("/auth/reissue");
+      } = await axiosInstance.get("/auth/reissue");
 
       if (localStorage.getItem("autoLogin")) {
         const expires = new Date();

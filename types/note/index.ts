@@ -1,12 +1,13 @@
 export interface ISubmitMakingNoteAdvanceType {
+  title: string;
   dayStart: string;
   dayEnd: string;
-  adult: number;
-  child: number;
-  animal: number;
-  region: string[];
-  theme?: string[];
-  places?: number[];
+  adult: string;
+  child: string;
+  animal: string;
+  placeList: number[];
+  publicShare: string;
+  maxPlacePerDay: string;
 }
 
 export interface IMakingNoteProfileType {

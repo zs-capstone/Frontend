@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { iconUrl } from "../../../../axiosInstance/constants";
 import Block from "../../../molecules/travel/making-note/Block";
 
-const MaxPerDay: React.FC = () => {
-  const [placeCount, setPlaceCount] = useState<number>(1);
+const MaxPerDay: React.FC<{
+  placeCount: number;
+  setPlaceCount: Dispatch<SetStateAction<number>>;
+}> = (props) => {
+  const { placeCount, setPlaceCount } = props;
 
   const handleMinusPlaceCount = () => {
     if (placeCount === 1) {

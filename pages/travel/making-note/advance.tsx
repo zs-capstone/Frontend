@@ -1,7 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { dehydrate, QueryClient } from "react-query";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { loaderDestUrl } from "../../../axiosInstance/constants";
@@ -9,14 +8,11 @@ import MakingNoteButton from "../../../components/atoms/ui/Button/MakingNoteButt
 import { Spacer } from "../../../components/atoms/ui/Spacer/Spacer";
 import AddedList from "../../../components/organisms/travel/making-note/AddedList";
 import Duration from "../../../components/organisms/travel/making-note/Duration";
-import LikedList from "../../../components/organisms/travel/making-note/LikedList";
-import Location from "../../../components/organisms/travel/making-note/Location";
 import MakingNoteName from "../../../components/organisms/travel/making-note/MakingNoteName";
 import MaxPerDay from "../../../components/organisms/travel/making-note/MaxPerDay";
 import Personnel from "../../../components/organisms/travel/making-note/Personnel";
 import PublicShare from "../../../components/organisms/travel/making-note/PublicShare";
 import SearchList from "../../../components/organisms/travel/making-note/SearchList";
-import Theme from "../../../components/organisms/travel/making-note/Theme";
 import { useSubmitMakingNoteAdvance } from "../../../hooks/travel/making-note/useSubmitMakingNoteAdvance";
 import { addedListState } from "../../../stores/Travel";
 import { IPlaceListDataType } from "../../../types/common";
@@ -29,10 +25,10 @@ const MakingNoteAdvance: NextPage = () => {
   const [kid, setKid] = useState<number>(0);
   const [pet, setPet] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
+  const [placeCount, setPlaceCount] = useState<number>(1);
   const [makingNoteButtonDisabled, setMakingNoteButtonDisabled] =
     useState<boolean>(true);
-  const [locationList, setLocationList] = useState<string[]>([]);
-  const [themeList, setThemeList] = useState<string[]>([]);
+  const [shareOther, setShareOther] = useState<boolean>(false);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [addedList, setAddedList] =
     useRecoilState<IPlaceListDataType[]>(addedListState);
@@ -46,14 +42,15 @@ const MakingNoteAdvance: NextPage = () => {
     }
 
     submitMakingNoteAdvanceAction({
+      title,
       dayStart: dateToString(startDate),
       dayEnd: dateToString(endDate),
-      adult,
-      child: kid,
-      animal: pet,
-      region: locationList,
-      theme: themeList,
-      places: addedList.map((elem) => elem.placeId),
+      adult: adult.toString(),
+      publicShare: shareOther ? "true" : "false",
+      child: kid.toString(),
+      animal: pet.toString(),
+      maxPlacePerDay: placeCount.toString(),
+      placeList: addedList.map((elem) => elem.placeId),
     });
   };
 
@@ -62,13 +59,14 @@ const MakingNoteAdvance: NextPage = () => {
       (!adult && !kid && !pet) ||
       !startDate ||
       !endDate ||
-      locationList.length === 0
+      !placeCount ||
+      !title
     ) {
       setMakingNoteButtonDisabled(true);
     } else {
       setMakingNoteButtonDisabled(false);
     }
-  }, [startDate, endDate, locationList.length, adult, kid, pet]);
+  }, [startDate, endDate, adult, kid, pet, placeCount, title]);
 
   return (
     <Container>
@@ -106,20 +104,15 @@ const MakingNoteAdvance: NextPage = () => {
               setPet={setPet}
             />
             <Spacer size={4} />
-            <PublicShare />
+            <PublicShare
+              shareOther={shareOther}
+              setShareOther={setShareOther}
+            />
             <Spacer size={4} />
-            <MaxPerDay />
-            {/* <Spacer size={4} />
-            <Location
-              locationList={locationList}
-              setLocationList={setLocationList}
-            /> */}
+            <MaxPerDay placeCount={placeCount} setPlaceCount={setPlaceCount} />
             <Spacer size={4} />
-            {/* <Theme themeList={themeList} setThemeList={setThemeList} /> */}
           </LeftMenuWrapper>
           <RightMenuWrapper>
-            {/* <LikedList addedList={addedList} setAddedList={setAddedList} /> */}
-            {/* <ResponsiveSpacer size={40} /> */}
             <SearchList
               title={"꼭 추가해야할 여행지"}
               searchKeyword={searchKeyword}

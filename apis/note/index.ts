@@ -23,24 +23,26 @@ import {
 
 // 새 여행 노트 생성
 export const submitMakingNoteAdvance = async ({
+  title,
   dayStart,
   dayEnd,
   adult,
   child,
   animal,
-  region,
-  theme,
-  places,
+  placeList,
+  publicShare,
+  maxPlacePerDay,
 }: ISubmitMakingNoteAdvanceType): Promise<{ travelNoteId: number }> => {
-  const { data } = await axiosInstance.post(`/note/new`, {
+  const { data } = await axiosInstance.post(`/notes`, {
+    title,
     dayStart,
     dayEnd,
     adult,
     child,
     animal,
-    region,
-    theme,
-    places,
+    placeList,
+    publicShare,
+    maxPlacePerDay,
   });
   return data;
 };
