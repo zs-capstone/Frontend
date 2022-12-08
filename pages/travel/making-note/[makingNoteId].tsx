@@ -36,25 +36,25 @@ const MakingNote: NextPage<{ makingNoteId: string }> = ({ makingNoteId }) => {
     ({ signal }) => fetchMakingNoteProfile(+makingNoteId, signal)
   );
 
-  const { data: coordinateData } = useQuery<IMakingNoteCoordinateType[]>(
-    [queryKeys.makingNoteCoordinate, +makingNoteId],
-    () => fetchMakingNoteCoordinate(+makingNoteId)
-  );
+  // const { data: coordinateData } = useQuery<IMakingNoteCoordinateType[]>(
+  //   [queryKeys.makingNoteCoordinate, +makingNoteId],
+  //   () => fetchMakingNoteCoordinate(+makingNoteId)
+  // );
 
-  const { data: courseData } = useQuery<IMakingNoteCourseDataType[]>(
-    [queryKeys.makingNoteCourse, +makingNoteId],
-    () => fetchMakingNoteCourse(+makingNoteId)
-  );
+  // const { data: courseData } = useQuery<IMakingNoteCourseDataType[]>(
+  //   [queryKeys.makingNoteCourse, +makingNoteId],
+  //   () => fetchMakingNoteCourse(+makingNoteId)
+  // );
 
-  const { data: placesRecommended } = useQuery<ITravelNoteRecommendPlaceType[]>(
-    [queryKeys.makingNotePlacesRecommended, +makingNoteId],
-    () => fetchNoteRecommendPlaceList(+makingNoteId)
-  );
+  // const { data: placesRecommended } = useQuery<ITravelNoteRecommendPlaceType[]>(
+  //   [queryKeys.makingNotePlacesRecommended, +makingNoteId],
+  //   () => fetchNoteRecommendPlaceList(+makingNoteId)
+  // );
 
   const [accommodationMobileOpen, setAccommodationMobileOpen] =
     useState<boolean>(false);
 
-  if (!profileData || !coordinateData || !courseData || !placesRecommended) {
+  if (!profileData) {
     return (
       <MakingContainer>
         <Image
@@ -69,49 +69,41 @@ const MakingNote: NextPage<{ makingNoteId: string }> = ({ makingNoteId }) => {
   }
 
   const {
-    adult,
-    animal,
-    child,
-    dayEnd,
-    dayStart,
-    noteAuthority,
-    publicShare,
-    region,
-    theme,
     title,
+    dayStart,
+    dayEnd,
+    adult,
+    child,
+    animal,
+    maxPlacePerDay,
+    recommendList,
   } = profileData;
 
   return (
     <Container>
       <LeftMenuWrapper>
-        <TravelProfile
+        {/* <TravelProfile
           makingNoteId={+makingNoteId}
-          duration={courseData.length}
           title={title}
           dayStart={dayStart}
           dayEnd={dayEnd}
           adult={adult}
           animal={animal}
-          noteAuthority={noteAuthority}
-          region={region}
-          theme={theme}
           child={child}
-          publicShare={publicShare}
-          placesRecommended={placesRecommended}
           accommodationMobileOpen={accommodationMobileOpen}
           setAccommodationMobileOpen={setAccommodationMobileOpen}
-        />
-        <AccommodationWrapper accommodationMobileOpen={accommodationMobileOpen}>
+        /> */}
+        {/* <AccommodationWrapper accommodationMobileOpen={accommodationMobileOpen}>
           <RecommendAccommodation
             dayStart={profileData.dayStart}
             travelNoteId={+makingNoteId}
             dayLength={courseData.length}
           />
-        </AccommodationWrapper>
+        </AccommodationWrapper> */}
       </LeftMenuWrapper>
       <RightMenuWrapper>
         <MapTitle>여행 지도</MapTitle>
-        <KakaoMap
+        {/* <KakaoMap
           width={"554px"}
           height={"230px"}
           rWidth={"100%"}
@@ -130,7 +122,7 @@ const MakingNote: NextPage<{ makingNoteId: string }> = ({ makingNoteId }) => {
         <MakingNoteCourse
           makingNoteId={+makingNoteId}
           courseData={courseData}
-        />
+        /> */}
       </RightMenuWrapper>
     </Container>
   );

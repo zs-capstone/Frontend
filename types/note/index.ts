@@ -11,16 +11,18 @@ export interface ISubmitMakingNoteAdvanceType {
 }
 
 export interface IMakingNoteProfileType {
-  noteAuthority: string;
   title: string;
   dayStart: string;
   dayEnd: string;
   adult: number;
   child: number;
   animal: number;
-  region: string[];
-  theme: string[];
-  publicShare: boolean;
+  maxPlacePerDay: number;
+  recommendList: {
+    day: number;
+    placeId: number;
+    isUserPick: boolean;
+  }[];
 }
 
 export interface IChangeNoteTitleType {

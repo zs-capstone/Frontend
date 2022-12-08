@@ -53,10 +53,10 @@ export const fetchMakingNoteProfile = async (
   travelNoteId: number,
   signal?: AbortSignal
 ): Promise<IMakingNoteProfileType> => {
-  const { data } = await axiosInstance.get(`/note/info/${travelNoteId}`, {
+  const { data } = await axiosInstance.get(`/notes/${travelNoteId}`, {
     signal,
   });
-  return data;
+  return data.data;
 };
 
 // 노트 이름 변경
