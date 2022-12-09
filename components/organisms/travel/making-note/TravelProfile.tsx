@@ -5,7 +5,6 @@ import BorderButton from "../../../atoms/ui/Button/BorderButton";
 import { Spacer } from "../../../atoms/ui/Spacer/Spacer";
 import CalendarInput from "../../../molecules/travel/making-note/CalendarInput";
 import PersonnelModal from "../../../molecules/travel/making-note/PersonnelModal";
-import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import { getCookie } from "../../../../utils/cookieUtils";
 import RecommendedPlace from "../../../molecules/travel/making-note/RecommendedPlace";
@@ -23,31 +22,12 @@ import { iconUrl } from "../../../../axiosInstance/constants";
 const TravelProfile: React.FC<
   {
     makingNoteId: number;
-    duration: number;
-    placesRecommended: ITravelNoteRecommendPlaceType[];
-    accommodationMobileOpen: boolean;
-    setAccommodationMobileOpen: Dispatch<SetStateAction<boolean>>;
   } & IMakingNoteProfileType
 > = (props) => {
-  const {
-    noteAuthority,
-    makingNoteId,
-    title,
-    dayStart,
-    dayEnd,
-    adult,
-    child,
-    animal,
-    publicShare,
-    placesRecommended,
-    duration,
-    accommodationMobileOpen,
-    setAccommodationMobileOpen,
-  } = props;
+  const { makingNoteId, title, dayStart, dayEnd, adult, child, animal } = props;
 
   const [startDate, setStartDate] = useState<Date | null>(new Date(dayStart));
   const [endDate, setEndDate] = useState<Date | null>(new Date(dayEnd));
-  const [shareOther, setShareOther] = useState<boolean>(publicShare);
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [editTitle, setEditTitle] = useState<boolean>(false);
   const [titleInput, setTitleInput] = useState<string>(title);
@@ -89,14 +69,6 @@ const TravelProfile: React.FC<
     } else {
       setEditTitle(true);
     }
-  };
-
-  const handleChangePublicShare = (e: React.ChangeEvent<HTMLInputElement>) => {
-    changeNotePublicShareAction({
-      travelNoteId: makingNoteId,
-      publicShare: e.target.checked,
-    });
-    setShareOther(e.target.checked);
   };
 
   useEffect(() => {
@@ -162,64 +134,22 @@ const TravelProfile: React.FC<
         )}
       </ButtonWrapper>
       <Spacer size={16} />
-      <CompanionModal makingNoteId={makingNoteId} />
-      <Spacer size={24} />
-      <ToggleWrapper>
-        <Share>타인과 여행계획 공유</Share>
-        <Toggle
-          onChange={handleChangePublicShare}
-          checked={shareOther}
-          icons={false}
-        />
-      </ToggleWrapper>
-      {noteAuthority === "ROLE_OWNER" && (
-        <>
-          <Spacer size={25} />
-          <RecommendWrapper>
-            <span>
-              <RecommendTitle>추천 여행지</RecommendTitle>
-              <Spacer size={11} />
-              <RecommendDescription>
-                {isLogin &&
-                  `${cookie}님과 비슷한 성향의 여행자가 만족한 여행지를 추가로 추천드려요!`}
-              </RecommendDescription>
-            </span>
-            <RefreshButton />
-          </RecommendWrapper>
-          <Spacer size={16} />
-          <PlaceWrapper>
-            {placesRecommended.map((place) => (
-              <RecommendedPlace
-                makingNoteId={makingNoteId}
-                key={place.placeId}
-                placeId={place.placeId}
-                title={place.title}
-                image={place.imageUrl}
-                duration={duration}
-              />
-            ))}
-          </PlaceWrapper>
-          <MobileWrapper>
-            {accommodationMobileOpen ? (
-              <BorderButton
-                width={"100%"}
-                height={"38px"}
-                onClick={() => setAccommodationMobileOpen(false)}
-              >
-                추천 숙소 접기
-              </BorderButton>
-            ) : (
-              <BorderButton
-                width={"100%"}
-                height={"38px"}
-                onClick={() => setAccommodationMobileOpen(true)}
-              >
-                추천 숙소 보기
-              </BorderButton>
-            )}
-          </MobileWrapper>
-        </>
-      )}
+      {/* <CompanionModal makingNoteId={makingNoteId} /> */}
+      <>
+        <Spacer size={25} />
+        <RecommendWrapper>
+          <span>
+            <RecommendTitle>추천 여행지</RecommendTitle>
+            <Spacer size={11} />
+            <RecommendDescription>
+              {isLogin &&
+                `${cookie}님과 비슷한 성향의 여행자가 만족한 여행지를 추가로 추천드려요!`}
+            </RecommendDescription>
+          </span>
+          <RefreshButton />
+        </RecommendWrapper>
+        <Spacer size={16} />
+      </>
     </Container>
   );
 };

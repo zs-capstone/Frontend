@@ -82,7 +82,7 @@ const MakingNote: NextPage<{ makingNoteId: string }> = ({ makingNoteId }) => {
   return (
     <Container>
       <LeftMenuWrapper>
-        {/* <TravelProfile
+        <TravelProfile
           makingNoteId={+makingNoteId}
           title={title}
           dayStart={dayStart}
@@ -90,9 +90,9 @@ const MakingNote: NextPage<{ makingNoteId: string }> = ({ makingNoteId }) => {
           adult={adult}
           animal={animal}
           child={child}
-          accommodationMobileOpen={accommodationMobileOpen}
-          setAccommodationMobileOpen={setAccommodationMobileOpen}
-        /> */}
+          maxPlacePerDay={maxPlacePerDay}
+          recommendList={recommendList}
+        />
         {/* <AccommodationWrapper accommodationMobileOpen={accommodationMobileOpen}>
           <RecommendAccommodation
             dayStart={profileData.dayStart}
