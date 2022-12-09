@@ -48,14 +48,7 @@ const MainHeader: React.FC<{ setMenuOpen: Dispatch<SetStateAction<boolean>> }> =
                 />
               </LogoSymbolImageContainer>
               <ResponsiveSpacer size={7} axis={"horizontal"} />
-              <LogoTextImageContainer>
-                <Image
-                  width={118}
-                  height={32}
-                  src={iconUrl("logo_text")}
-                  alt={"텍스트형 메인 로고"}
-                />
-              </LogoTextImageContainer>
+              <LogoText>제주 어디갈래?</LogoText>
             </Logo>
           </a>
         </Link>
@@ -202,4 +195,10 @@ const ResponsiveSpacer = styled(Spacer)`
     theme.media.mobile({
       display: "none",
     })}
+`;
+
+const LogoText = styled.p`
+  font-family: ${({ theme }) => theme.mixin.fontSize(24, theme.color.main50)};
+  margin-left: 4px;
+  font-family: "NexonBold";
 `;

@@ -1,7 +1,7 @@
 export const baseUrl = "http://jejuwhere.xyz/api";
 export const baseImageUrl = `${baseUrl}/images`;
 export const iconUrl = (url: string) => {
-  return `https://yeoreodigm-s3.s3.ap-northeast-2.amazonaws.com/assets/icons/${url}.svg`;
+  return `https://capstone4-s3.s3.ap-northeast-2.amazonaws.com/images/${url}.svg`;
 };
 
 export const markerImage = (day: number) => {
