@@ -9,7 +9,7 @@ export const markerImage = (day: number) => {
 };
 
 export const loaderDestUrl =
-  "https://yeoreodigm-s3.s3.ap-northeast-2.amazonaws.com/assets/loader/loader_dest.gif";
+  "https://capstone4-s3.s3.ap-northeast-2.amazonaws.com/loader_dest.gif";
 
 export const loaderAirplaneUrl =
-  "https://yeoreodigm-s3.s3.ap-northeast-2.amazonaws.com/assets/loader/loader_airplane.gif";
+  "https://capstone4-s3.s3.ap-northeast-2.amazonaws.com/loader_airplane.gif";
